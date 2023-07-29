@@ -8,8 +8,8 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const response = await Recipemodel.find({});
-    res.status(200).json(response);
+    const result = await Recipemodel.find({});
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -53,6 +53,7 @@ router.get("/:recipeId", async (req, res) => {
   }
 });
 
+// Save a Recipe
 router.put("/", async (req, res) => {
   const recipe = await Recipemodel.findById(req.body.recipeID);
   const user = await Usermodel.findById(req.body.userID);
@@ -65,21 +66,26 @@ router.put("/", async (req, res) => {
   }
 });
 
+// Get id of saved recipes
 router.get("/savedRecipes/ids/:userID", async (req, res) => {
   try {
     const user = await Usermodel.findById(req.params.userID);
     res.status(201).json({ savedRecipes: user?.savedRecipes });
   } catch (err) {
-    res.json(err);
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
+// Get saved recipes
 router.get("/savedRecipes/:userID", async (req, res) => {
   try {
     const user = await Usermodel.findById(req.params.userID);
     const savedRecipes = await Recipemodel.find({
       _id: { $in: user.savedRecipes },
     });
+
+    console.log(savedRecipes);
     res.status(201).json({ savedRecipes });
   } catch (err) {
     res.status(500).json(err);
