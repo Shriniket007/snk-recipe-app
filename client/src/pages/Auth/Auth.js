@@ -24,10 +24,13 @@ const Login = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/auth/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://dull-plum-angler-cap.cyclic.app//auth/login",
+        {
+          username,
+          password,
+        }
+      );
 
       setCookies("access_token", response.data.token); //storin the token sent into access_token
       window.localStorage.setItem("userID", response.data.userID);

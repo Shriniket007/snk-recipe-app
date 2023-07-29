@@ -41,9 +41,13 @@ const CreateRecipe = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/recipes", recipe, {
-        headers: { Authorization: cookies.access_token },
-      });
+      await axios.post(
+        "https://dull-plum-angler-cap.cyclic.app/recipes",
+        recipe,
+        {
+          headers: { Authorization: cookies.access_token },
+        }
+      );
       alert("Recipe created");
       navigate("/"); //for redirecting to the home page
     } catch (err) {

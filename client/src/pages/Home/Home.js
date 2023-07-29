@@ -15,7 +15,9 @@ const Home = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const response = await axios.get("/recipes");
+        const response = await axios.get(
+          "https://dull-plum-angler-cap.cyclic.app/recipes"
+        );
         setRecipes(response.data);
       } catch (err) {
         console.error(err);
@@ -24,7 +26,9 @@ const Home = () => {
 
     const fetchSavedRecipes = async () => {
       try {
-        const response = await axios.get(`/recipes/savedRecipes/ids/${userID}`);
+        const response = await axios.get(
+          `https://dull-plum-angler-cap.cyclic.app/recipes/savedRecipes/ids/${userID}`
+        );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
         console.error(err);
