@@ -27,7 +27,7 @@ router.post("/", verifyToken, async (req, res) => {
   });
   console.log(recipe);
   try {
-    const response = await recipe.save();
+    const result = await recipe.save();
     res.status(201).json({
       createdRecipe: {
         name: result.name,

@@ -1,6 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import mongoose from "mongoose"; // Import mongoose
 
 const router = express.Router();
 
@@ -59,7 +60,7 @@ export { router as userRouter };
 export const verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
   if (token) {
-    jwt.verify(token, process.env.TOKEN, (err) => {
+    jwt.verify(token.split(" ")[1], process.env.TOKEN, (err) => {
       if (err) return res.sendStatus(403);
       next();
     });
@@ -67,3 +68,18 @@ export const verifyToken = (req, res, next) => {
     res.sendStatus(401);
   }
 };
+
+//changed
+// //middleware
+// export const verifyToken = (req, res, next) => {
+//   const token = req.headers.authorization;
+//   if (token) {
+//     jwt.verify(token.split(" ")[1], process.env.TOKEN, (err) => {
+//       // Extract token from "Authorization" header
+//       if (err) return res.sendStatus(403);
+//       next();
+//     });
+//   } else {
+//     res.sendStatus(401);
+//   }
+// };
