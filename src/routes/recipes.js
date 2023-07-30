@@ -66,16 +66,16 @@ router.put("/", async (req, res) => {
   }
 });
 
-// Get id of saved recipes
-router.get("/savedRecipes/ids/:userID", async (req, res) => {
-  try {
-    const user = await Usermodel.findById(req.params.userID);
-    res.status(201).json({ savedRecipes: user?.savedRecipes });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+// // Get id of saved recipes
+// router.get("/savedRecipes/ids/:userID", async (req, res) => {
+//   try {
+//     const user = await Usermodel.findById(req.params.userID);
+//     res.status(201).json({ savedRecipes: user?.savedRecipes });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
 
 // Get saved recipes
 router.get("/savedRecipes/:userID", async (req, res) => {
